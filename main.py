@@ -3,6 +3,7 @@ import numpy as np
 
 def main():
     dracula()
+    bikes()
 
 
 def dracula():
@@ -11,14 +12,14 @@ def dracula():
     wordOccurences = {}
 
     # open the file
-    file_obj = open("data/Dracula.txt", "r")
+    file = open("data/Dracula.txt", "r")
 
     # read data from file
-    file_data = file_obj.read()
-    file_obj.close()
+    data = file.read()
+    file.close()
 
     # split words
-    words = file_data.split()
+    words = data.split()
 
     for word in words:
         if len(word) >= minWordLength:
@@ -33,6 +34,23 @@ def dracula():
     return
 
 
+def bikes():
+    file = open("data/day.csv", "r")
+    weather = np.array([], dtype=int)
+    rentals = np.array([], dtype=int)
+
+    for line in file:
+        elements = line.split(",")
+        if elements[0] != "instant":
+            weather = np.append(weather, int(elements[8]))
+            rentals = np.append(rentals, int(elements[15]))
+
+    file.close()
+
+    print("Number of days: ", np.sum(weather == 1))
+    print("Average number of rentals: ", np.mean(rentals[weather == 1]))
+
+    return
 
 
 main()
