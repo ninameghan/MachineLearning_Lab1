@@ -1,16 +1,39 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+import numpy as np
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    dracula()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+def dracula():
+    minWordLength = 5
+    minWordOccurence = 300
+    wordOccurences = {}
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # open the file
+    file_obj = open("data/Dracula.txt", "r")
+
+    # read data from file
+    file_data = file_obj.read()
+    file_obj.close()
+
+    # split words
+    words = file_data.split()
+
+    for word in words:
+        if len(word) >= minWordLength:
+            if word in wordOccurences:
+                wordOccurences[word] = wordOccurences[word] + 1
+            else:
+                wordOccurences[word] = 1
+
+    for word in wordOccurences:
+        if wordOccurences[word] >= minWordOccurence:
+            print(word + ":" + str(wordOccurences[word]))
+    return
+
+
+
+
+main()
+
