@@ -3,8 +3,8 @@ from matplotlib import pyplot as plt
 
 
 def main():
-    # dracula()
-    # bikes()
+    dracula()
+    bikes()
     random_data_2d()
     random_data_3d()
 
