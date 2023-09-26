@@ -1,9 +1,12 @@
 import numpy as np
+from matplotlib import pyplot as plt
 
 
 def main():
-    dracula()
-    bikes()
+    # dracula()
+    # bikes()
+    random_data_2d()
+    random_data_3d()
 
 
 def dracula():
@@ -50,6 +53,49 @@ def bikes():
     print("Number of days: ", np.sum(weather == 1))
     print("Average number of rentals: ", np.mean(rentals[weather == 1]))
 
+    return
+
+
+def random_data_2d():
+    no_of_clusters = 3
+    cluster_mean = np.random.rand(no_of_clusters, 2)
+
+    data = np.array([[]])
+    target = np.array([[]], dtype='int')
+
+    points_per_cluster = 100
+    sigma = 0.1
+    for i in range(no_of_clusters):
+        noise = sigma * np.random.randn(points_per_cluster, 2)
+        cluster = cluster_mean[i, :] + noise
+        data = np.append(data, cluster).reshape((i + 1) * points_per_cluster, 2)
+        target = np.append(target, [i] * points_per_cluster)
+
+    plt.figure()
+    plt.scatter(data[:, 0], data[:, 1], c=target)
+    plt.show()
+    return
+
+
+def random_data_3d():
+    no_of_clusters = 3
+    cluster_mean = np.random.rand(no_of_clusters, 3)
+
+    data = np.array([[]])
+    target = np.array([[]], dtype='int')
+
+    points_per_cluster = 100
+    sigma = 0.1
+    for i in range(no_of_clusters):
+        noise = sigma * np.random.randn(points_per_cluster, 3)
+        cluster = cluster_mean[i, :] + noise
+        data = np.append(data, cluster).reshape((i + 1) * points_per_cluster, 3)
+        target = np.append(target, [i] * points_per_cluster)
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+    ax.scatter(data[:, 0], data[:, 1], data[:, 2], c=target)
+    plt.show()
     return
 
 
